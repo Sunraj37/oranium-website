@@ -10,6 +10,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <script src="https://smtpjs.com/v3/smtp.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
     <style>
         @font-face {
@@ -1222,7 +1223,7 @@
                         <b>Name:</b>
                     </div>
                     <div class="col-sm-9 col-xs-9 col-lg-9 col-xl-9 col-md-9">
-                        <input type="text" class="form-control" id="pwd" placeholder="Enter Name" name="pwd">
+                        <input type="text" class="form-control" id="name" placeholder="Enter Name" name="pwd">
                     </div>
                 </div>
                 <div class="row" style="margin: 15px -15px;">
@@ -1230,7 +1231,7 @@
                         <b>Mobile Number:</b>
                     </div>
                     <div class="col-sm-9 col-xs-9 col-lg-9 col-xl-9 col-md-9">
-                        <input type="text" class="form-control" id="pwd" placeholder="Enter Mobile Number"
+                        <input type="text" class="form-control" id="mobileNumber" placeholder="Enter Mobile Number"
                             name="pwd">
                     </div>
                 </div>
@@ -1239,7 +1240,7 @@
                         <b>Email Id:</b>
                     </div>
                     <div class="col-sm-9 col-xs-9 col-lg-9 col-xl-9 col-md-9">
-                        <input type="text" class="form-control" id="pwd" placeholder="Enter Email Id" name="pwd">
+                        <input type="text" class="form-control" id="emailId" placeholder="Enter Email Id" name="pwd">
                     </div>
                 </div>
                 <div class="row" style="margin: 15px -15px;">
@@ -1247,12 +1248,12 @@
                         <b>Batch:</b>
                     </div>
                     <div class="col-sm-9 col-xs-9 col-lg-9 col-xl-9 col-md-9">
-                        <select class="form-control" id="sel1">
-                            <option>Virtual Training</option>
-                            <option>Class Room Traing</option>
-                            <option>One to one training</option>
-                            <option>Batch training</option>
-                            <option>Corporate training</option>
+                        <select class="form-control" id="batch">
+                            <option value="1">Virtual Training</option>
+                            <option value="2">Class Room Traing</option>
+                            <option value="3">One to one training</option>
+                            <option value="4">Batch training</option>
+                            <option value="5">Corporate training</option>
                         </select>
                     </div>
                 </div>
@@ -1261,16 +1262,16 @@
                         <b>Preferrable Class Timings:</b>
                     </div>
                     <div class="col-sm-9 col-xs-9 col-lg-9 col-xl-9 col-md-9">
-                        <select class="form-control" id="sel1">
-                            <option>Week Days</option>
-                            <option>Week End</option>
+                        <select class="form-control" id="classTimings">
+                            <option value="1">Week Days</option>
+                            <option value="2">Week End</option>
                         </select>
                     </div>
                 </div>
             </div>
             <div style="text-align: center;">
                 <button class="btn ben-primary" style="background: #f25f25; color: #fff; width: 200px; height: 40px;"
-                    onclick="sendMail(); return false">
+                    onclick="sendMail();">
                     Send
                 </button>
             </div>
@@ -1286,9 +1287,6 @@
                     style="height: 70%; position: relative; left: 12px; top: 6px;" /></a>
         </div>
     </div>
-    <!-- <textarea id="myText">
-        Lorem ipsum...
-    </textarea> -->
     <div id="mySidenav" class="sidenav">
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
         <div style="height: 100%; overflow-y: scroll; padding-bottom: 100px;">
@@ -1353,35 +1351,6 @@
         getTomorrowFunction();
         document.addEventListener('DOMContentLoaded', function () {
             getTomorrowFunction();
-            // function drawText(word) {
-            //     word = word || 'Oranium Tech';
-            //     var wordArray = word.split('');
-            //     var innerTextElement = document.getElementById('inner-text');
-            //     innerTextElement.innerHTML = '';
-            //     innerTextElement.classList.remove('done-animating');
-            //     wordArray.forEach(function (letter, index) {
-            //         var span = document.createElement('span');
-            //         span.textContent = letter;
-            //         span.className = 'letter animate';
-            //         span.style['animation-delay'] = (300 * index) + 'ms';
-            //         innerTextElement.appendChild(span);
-
-            //         if (index === wordArray.length - 1) {
-            //             span.addEventListener('animationend', function () {
-            //                 innerTextElement.classList.add('done-animating');
-            //             });
-            //         }
-            //     });
-            // }
-
-            // document.getElementById('custom-text-form').addEventListener('submit', function (e) {
-            //     e.preventDefault();
-            //     e.stopPropagation();
-
-            //     drawText(document.getElementById('custom-text').value);
-            // });
-
-            // drawText();
         });
 
         function gotoHome() {
@@ -1428,80 +1397,115 @@
         function getTomorrowFunction() {
             // Creating the date instance
             let d = new Date();
-
             // Adding one date to the present date
             d.setDate(d.getDate() + 1);
-
-            let year = d.getFullYear()
-            let month = String(d.getMonth() + 1)
-            let day = String(d.getDate())
-
+            let year = d.getFullYear();
+            let month = String(d.getMonth() + 1);
+            let day = String(d.getDate());
             // Adding leading 0 if the day or month
             // is one digit value
             month = month.length == 1 ?
                 month.padStart('2', '0') : month;
-
             day = day.length == 1 ?
                 day.padStart('2', '0') : day;
-
-            // Printing the present date
-            console.log(`${year}-${month}-${day}`);
-
-
             return `${day}-${month}-${year}`;
         }
         document.getElementById("tomorrowDate").innerHTML = window.getTomorrowFunction();
 
-        function sendMail() {
-            sendEmail();
-            // getLinkWhastapp(7092421692, 'HI');
-            // QuickEasySMS();
+        async function sendMail() {
+            const name = document.getElementById("name").value;
+            const mobileNumber = document.getElementById("mobileNumber").value;
+            const emailId = document.getElementById("emailId").value;
+            if (name === "") {
+                alert("Please Enter the Name!");
+                return;
+            }
+            if (mobileNumber === "") {
+                alert("Please Enter the Mobile number!");
+                return;
+            }
+            if (emailId === "") {
+                alert("Please Enter the Email Id!");
+                return;
+            }
+            await sendEmail();
+            clear();
             closePopup();
         }
 
-        function sendEmail() {
-            Email.send({
-                SecureToken: "238a8f56-cf42-4cec-8e17-e543650a6017",
-                To: 'niralapp@gmail.com',
-                From: "niralapp@gmail.com",
-                Subject: "Sending Email using javascript",
-                Body: "Well that was easy!!",
-            }).then(function (message) {
-                alert("mail sent successfully")
-            });
+        var curday = function (sp) {
+            today = new Date();
+            var dd = today.getDate();
+            var mm = today.getMonth() + 1; //As January is 0.
+            var yyyy = today.getFullYear();
+
+            if (dd < 10) dd = '0' + dd;
+            if (mm < 10) mm = '0' + mm;
+            return (dd + sp + mm + sp + yyyy);
+        };
+
+        async function sendEmail() {
+            const name = document.getElementById("name").value;
+            const mobileNumber = document.getElementById("mobileNumber").value;
+            const emailId = document.getElementById("emailId").value;
+            const batch = document.getElementById("batch").value;
+            const classTimings = document.getElementById("classTimings").value;
+            var batch_name;
+            var class_timings_name;
+            var curDate = curday('/');
+            if (name === "") {
+                alert("Please Enter the Name!");
+                return;
+            }
+            if (mobileNumber === "") {
+                alert("Please Enter the Mobile number!");
+                return;
+            }
+            if (emailId === "") {
+                alert("Please Enter the Email Id!");
+                return;
+            }
+            if (batch === "1") {
+                batch_name = "Virtual Training";
+            } else if (batch === "2") {
+                batch_name = "Class Room Traing";
+            } else if (batch === "3") {
+                batch_name = "One to one Training";
+            } else if (batch === "4") {
+                batch_name = "Batch Training";
+            } else if (batch === "5") {
+                batch_name = "Corporate Training";
+            }
+            if (classTimings === "1") {
+                class_timings_name = "Week Days";
+            } else if (classTimings === "2") {
+                class_timings_name = "Week End";
+            }
+            try {
+                const todo = {
+                    "name": name,
+                    "phone_number": mobileNumber,
+                    "email_id": emailId,
+                    "batch_no": batch,
+                    "batch_name": batch_name,
+                    "class_timings_id": classTimings,
+                    "class_timings_name": class_timings_name,
+                    "date": curDate
+                }
+                const response = await axios.post('http://localhost/oraniumTech.php/post', todo);
+                const mailResponse = await axios.post('http://localhost/gmail-email/mail.php/postEmail', todo);
+                alert(response.data.message);
+            } catch (errors) {
+                console.error(errors);
+            }
         }
-
-        function getLinkWhastapp(number, message) {
-            var url = 'https://api.whatsapp.com/send?phone='
-                + number
-                + '&text='
-                + encodeURIComponent(message)
-
-            return url
-        }
-
-        async function QuickEasySMS() {
-            event.preventDefault();
-            const form = event.target;
-            const result = await fetch("https://quick-easy-sms.p.rapidapi.com/send", {
-                "method": "POST",
-                "headers": {
-                    "x-rapidapi-host": "quick-easy-sms.p.rapidapi.com",
-                    "x-rapidapi-key": "501f92d24bmsh2b12e3e57a3fa8cp1dca52jsn5ef3014e0569",
-                    "content-type": "application/json"
-                },
-                "body": JSON.stringify({
-                    "message": 'Hi',
-                    "toNumber": 7092421692,
-                })
-            });
-
-            const body = await result.json();
-            console.log(body);
-
-            alert(body.StatusCode === 0
-                ? 'Code sent!'
-                : 'Something went wrong. Check dev console.');
+        
+        function clear() {
+            document.getElementById("name").value = "";
+            document.getElementById("mobileNumber").value = "";
+            document.getElementById("emailId").value = "";
+            document.getElementById("batch").value = 1;
+            document.getElementById("classTimings").value = 1;
         }
 
         function openNav() {
