@@ -8,6 +8,7 @@ use PHPMailer\PHPMailer\Exception;
 require 'PHPMailer/src/Exception.php';
 require 'PHPMailer/src/PHPMailer.php';
 require 'PHPMailer/src/SMTP.php';
+require 'PHPMailerAutoload.php';
  
 // get the HTTP method, path and body of the request
 $method = $_SERVER['REQUEST_METHOD'];
@@ -51,16 +52,17 @@ function postEmail ($table,$values,$link) {
         
         // create object of PHPMailer class with boolean parameter which sets/unsets exception.
         $mail = new PHPMailer(true);
+        $mail->SMTPDebug = 2;
         $mail->isSMTP(); // using SMTP protocol
-        $mail->Host = 'smtp.gmail.com'; // SMTP host as gmail
+        $mail->Host = 'mail.oraniumtech.com'; // SMTP host as gmail
         $mail->SMTPAuth = true;  // enable smtp authentication
-        $mail->Username = 'niralapp@gmail.com';  // sender gmail host
-        $mail->Password = 'niralapps'; // sender gmail host password
+        $mail->Username = 'training@oraniumtech.com';  // sender gmail host
+        $mail->Password = 'Training@321'; // sender gmail host password
         $mail->SMTPSecure = 'tls';  // for encrypted connection
-        $mail->Port = 587;   // port for SMTP
-    
-        $mail->setFrom('niralapp@gmail.com', "Niral App"); // sender's email and name
-        $mail->addAddress('niralapp@gmail.com', "Niral App");  // receiver's email and name
+        $mail->Port = 587;   // port for SMTP        
+
+        $mail->setFrom('training@oraniumtech.com', "Oranium Tech"); // sender's email and name
+        $mail->addAddress('training@oraniumtech.com', "Oranium Tech");  // receiver's email and name
 
         $mailBody = "Hi! A new Entry has came. Name: '".$name."', Phone Number: '".$phone_number."', Email id: '".$email_id."', Batch: '".$batch_name."', Class Timings: '".$class_timings_name."', Date: '".$date."'";
     

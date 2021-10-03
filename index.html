@@ -1539,7 +1539,7 @@
                         <b>Name:</b>
                     </div>
                     <div class="col-sm-9 col-xs-9 col-lg-9 col-xl-9 col-md-9">
-                        <input type="text" class="form-control" id="name" placeholder="Enter Name" name="pwd">
+                        <input type="text" class="form-control" id="name" placeholder="Enter Name">
                     </div>
                 </div>
                 <div class="row" style="margin: 15px -15px;">
@@ -1548,7 +1548,7 @@
                     </div>
                     <div class="col-sm-9 col-xs-9 col-lg-9 col-xl-9 col-md-9">
                         <input type="text" class="form-control" id="mobileNumber" placeholder="Enter Mobile Number"
-                            name="pwd">
+                           >
                     </div>
                 </div>
                 <div class="row" style="margin: 15px -15px;">
@@ -1556,7 +1556,7 @@
                         <b>Email Id:</b>
                     </div>
                     <div class="col-sm-9 col-xs-9 col-lg-9 col-xl-9 col-md-9">
-                        <input type="text" class="form-control" id="emailId" placeholder="Enter Email Id" name="pwd">
+                        <input type="text" class="form-control" id="emailId" placeholder="Enter Email Id">
                     </div>
                 </div>
                 <div class="row" style="margin: 15px -15px;">
@@ -1730,6 +1730,21 @@
         document.getElementById("tomorrowDate").innerHTML = window.getTomorrowFunction();
 
         async function sendMail() {
+            const name = document.getElementById("name").value;
+            const mobileNumber = document.getElementById("mobileNumber").value;
+            const emailId = document.getElementById("emailId").value;
+            if (name === "") {
+                alert("Please Enter the Name!");
+                return;
+            }
+            if (mobileNumber === "") {
+                alert("Please Enter the Mobile number!");
+                return;
+            }
+            if (emailId === "") {
+                alert("Please Enter the Email Id!");
+                return;
+            }
             await sendEmail();
             clear();
             closePopup();
@@ -1755,18 +1770,8 @@
             var batch_name;
             var class_timings_name;
             var curDate = curday('/');
-            if (name === "") {
-                alert("Please Enter the Name!");
-                return;
-            }
-            if (mobileNumber === "") {
-                alert("Please Enter the Mobile number!");
-                return;
-            }
-            if (emailId === "") {
-                alert("Please Enter the Email Id!");
-                return;
-            }
+            var baseUrl;
+            var mailUrl;
             if (batch === "1") {
                 batch_name = "Virtual Training";
             } else if (batch === "2") {
@@ -1783,6 +1788,16 @@
             } else if (classTimings === "2") {
                 class_timings_name = "Week End";
             }
+            if (window.location.hostname === "localhost") {
+                baseUrl = "http://localhost/oraniumTech.php";
+            } else {
+                baseUrl = "https://oraniumtech.com/api/oraniumTech.php";
+            }
+            if (window.location.hostname === "localhost") {
+                mailUrl = "http://localhost/gmail-email/mail.php";
+            } else {
+                mailUrl = "https://oraniumtech.com/api/gmail-email/mail.php";
+            }
             try {
                 const todo = {
                     "name": name,
@@ -1794,8 +1809,9 @@
                     "class_timings_name": class_timings_name,
                     "date": curDate
                 }
-                const response = await axios.post('http://localhost/oraniumTech.php/post', todo);
-                const mailResponse = await axios.post('http://localhost/gmail-email/mail.php/postEmail', todo);
+                
+                const response = await axios.post(baseUrl+'/post', todo);
+                const mailResponse = await axios.post(mailUrl+'/postEmail', todo);
                 alert(response.data.message);
             } catch (errors) {
                 console.error(errors);

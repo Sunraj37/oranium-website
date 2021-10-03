@@ -19,7 +19,8 @@ $request = explode('/', trim($_SERVER['PATH_INFO'],'/'));
 $input = json_decode(file_get_contents('php://input'),true);
 if (!$input) $input = array();
 // connect to the mysql database
-$link = mysqli_connect('localhost', 'root', '', 'oranium_tech');
+// $link = mysqli_connect('localhost', 'root', '', 'oranium_tech');
+$link = mysqli_connect('162.241.85.69', 'orani7hw', 'Oranium#321##', 'orani7hw_oranium_tech');
 mysqli_set_charset($link,'utf8');  
 // retrieve the table and key from the path
 $api = preg_replace('/[^a-z0-9_]+/i','',array_shift($request));
