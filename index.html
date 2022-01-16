@@ -12,6 +12,34 @@
     <script src="https://smtpjs.com/v3/smtp.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
+    <meta charset="utf-8" />
+    <link rel="icon" href="./favicon.ico" />
+    <meta
+      name="title"
+      content="Oranium Tech"
+    />
+    <meta
+      name="description"
+      content="Best Software Testing Training Institute with 100% placement."
+    />
+    <meta
+      name="keywords"
+      content="Software training in Chennai,
+      Software training in Chromepet,
+      Software testing in Chennai,
+      Software testing in Chromepet,
+      Best training Institute in Chennai,
+      Software training, software testing
+      Top 5 software training in chennai,
+      Top 5 software training in Tamilnadu,
+      Top 5 software testing in chennai,
+      Top 5 software testing in Tamilnadu,
+      Selenium,
+      Placement,
+      100% placement,
+      IT training"
+    />
+
     <style>
         @font-face {
             font-family: Spantaran;
@@ -1089,7 +1117,7 @@
                                             <li><a>C#</a></li>
                                         </ul>
                                     </li>
-                                    <li><a>Oracle/SQL</a></li>
+                                    <li><a onclick="goToOracle()">Oracle/SQL</a></li>
                                     <li><a>Software Testing
                                             <img style="height: 15px; float: right; margin-top: 9px;"
                                                 src="./images/right_arrow_new.png" />
@@ -1098,7 +1126,7 @@
                                             <li><a>Manual Testing</a></li>
                                             <li><a>Automation Testing</a>
                                                 <ul class="dropdown-content">
-                                                    <li><a>Selenium</a></li>
+                                                    <li><a onclick="gotoSelenium()">Selenium</a></li>
                                                     <li><a>Cypress</a></li>
                                                 </ul>
                                             </li>
@@ -1626,7 +1654,7 @@
                     <a onclick="showAutomationTesting()">Automation Testing<img class="drop-down-img"
                             src="./images/drop_down.png" style="width: 15px; margin-left: 5px;" /></a>
                     <div id="automationTestingListContainer" class="course-list" style="display: none;">
-                        <a>Selenium</a>
+                        <a onclick="gotoSelenium()">Selenium</a>
                         <a>Cypress</a>
                     </div>
                     <a>Robot Framework</a>
@@ -1700,6 +1728,14 @@
             } else {
                 location.href = "https://oraniumtech.com/contact-us.html";
             }
+        }
+
+        function gotoSelenium() {
+            // if (window.location.hostname === "localhost") {
+            //     location.href = "http://localhost/OraniumTech/selenium-course.html";
+            // } else {
+            //     location.href = "https://oraniumtech.com/selenium-course.html";
+            // }
         }
 
         function closePopup() {
@@ -1845,6 +1881,11 @@
         }
 
         function goToOracle() {
+            // if (window.location.hostname === "localhost") {
+            //     location.href = "http://localhost/OraniumTech/oracle-course.html";
+            // } else {
+            //     location.href = "https://oraniumtech.com/oracle-course.html";
+            // }
             document.getElementById("courseListContainer").style.display = "block";
         }
 
