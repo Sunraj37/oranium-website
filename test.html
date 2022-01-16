@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h1>The input element</h1>
+<!-- 
+<form>
+  <label for="fname">First name:</label>
+  <input type="text" id="fname" name="fname"><br><br>
+  <label for="lname">Last name:</label>
+  <input type="text" id="lname" name="lname"><br><br>
+  <button click="onFunc()">Submit</button>
+</form> -->
+<input type="text" id="sunil" name="sunil"><br><br>
+<button onclick="onFunc()">Submit</button>
+
+</body>
+<script>
+    function onFunc() {
+        var sunil = document.getElementById('sunil');        
+        debugger
+        alert(sunil.value);
+    }
+</script>
+</html>
